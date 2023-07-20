@@ -10,7 +10,7 @@ export default function generateCards(n: number): CardInfo[] {
   for (let i = 0; i < n/2; i++) {
 	let card: CardInfo = { 
 		id: i,
-		content: getRandomEmoji(i),
+		emoji: getRandomEmoji(i),
 		status: CardStatus.Default
 	};
 	cards.push(card);
@@ -26,9 +26,20 @@ export default function generateCards(n: number): CardInfo[] {
   return cards;
 }
 
-function getRandomEmoji(i:number): string {
-  const emojis = ['😀', '😃', '😄', '😊', '😎', '🤩', '😍', '😘', '😆', '😉'];
-//   const randomIndex = Math.floor(Math.random() * emojis.length);
-//   return emojis[randomIndex];
+function getRandomEmoji(i:number): number {
+  const emojis = [
+	127850,
+	127875,
+	127919,
+	127925,
+	127936,
+	128096,
+	128133,
+	128142,
+	128148,
+	128175,
+	128169,
+	128190
+]
 	return emojis[i];
 }

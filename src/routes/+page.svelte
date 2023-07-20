@@ -6,7 +6,7 @@
 
 	let cards: CardInfo[] = [];
 	let gameStatus: GameStatus = GameStatus.Playing;
-	let gridSize = 4;
+	let gridSize = 16;
 
 	function restart() {
 		cards = generateCards(gridSize);
@@ -18,7 +18,7 @@
 	$: {
 		let selected = cards.filter(card => card.status === CardStatus.Selected);
 		if(selected.length === 2) {
-			if(selected[0].content == selected[1].content) {
+			if(selected[0].emoji == selected[1].emoji) {
 				selected.forEach(card => card.status = CardStatus.Solved);
 			} 
 		}

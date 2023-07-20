@@ -11,6 +11,6 @@ export enum GameStatus {
 
 export interface CardInfo {
 	id: number,
-	content: string,
+	emoji: number,
 	status: CardStatus
 }
