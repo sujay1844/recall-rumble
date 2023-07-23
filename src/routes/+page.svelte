@@ -15,8 +15,11 @@
 
 {#if $gameStatus == GameStatus.Default}
 
-	<button on:click={() => $gameStatus = GameStatus.Playing}>Start</button>
-	<Slider bind:value={gridSize} min={2} max={8} step={2} />
+	<div>
+		<button on:click={() => $gameStatus = GameStatus.Playing}>Start</button>
+		<Slider bind:value={gridSize} min={2} max={8} step={2} />
+
+	</div>
 
 {:else if $gameStatus == GameStatus.Playing}
 
@@ -25,7 +28,26 @@
 
 {:else if $gameStatus == GameStatus.Won}
 
-	<h1>You won!</h1>
-	<button on:click={() => $gameStatus = GameStatus.Default}>Play again</button>
+	<div>
+		<h1>You won!</h1>
+		<button on:click={() => $gameStatus = GameStatus.Default}>Play again</button>
+	</div>
 
 {/if}
+
+<style>
+	div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-top: 20%;
+	}
+	div button {
+		margin: 1em;
+		padding: 1em;
+		padding-left: 2em;
+		padding-right: 2em;
+		border-radius: 1em;
+	}
+</style>
