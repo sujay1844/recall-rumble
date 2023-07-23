@@ -5,6 +5,7 @@ export enum CardStatus {
 }
 
 export enum GameStatus {
+	Default,
 	Playing,
 	Won,
 }

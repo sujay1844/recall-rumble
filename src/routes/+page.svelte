@@ -1,54 +1,31 @@
-<script lang='ts'>
-	import { onMount } from "svelte";
-	import { CardStatus, GameStatus, type CardInfo } from "$lib/types";
-	import generateCards from "$lib/genCards";
-	import Card from "$lib/Card.svelte";
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/carbon-components-svelte/css/white.css"
+  />
+</svelte:head>
 
-	let cards: CardInfo[] = [];
-	let gameStatus: GameStatus = GameStatus.Playing;
-	let gridSize = 16;
-
-	function restart() {
-		cards = generateCards(gridSize);
-		gameStatus = GameStatus.Playing;
-	}
-
-	onMount(restart);
-
-	$: {
-		let selected = cards.filter(card => card.status === CardStatus.Selected);
-		if(selected.length === 2) {
-			if(selected[0].emoji == selected[1].emoji) {
-				selected.forEach(card => card.status = CardStatus.Solved);
-			} 
-		}
-		if(selected.length > 2) {
-			selected.forEach(card => card.status = CardStatus.Default);
-		}
-
-		if(cards.length > 1 && cards.every(card => card.status === CardStatus.Solved)) {
-			gameStatus = GameStatus.Won;
-		}
-	}
-
-
+<script>
+	import CardGrid from "$lib/CardGrid.svelte";
+	import { gameStatus } from "$lib/store";
+	import { GameStatus } from "$lib/types";
+	import { Slider } from "carbon-components-svelte";
+	let gridSize = 2;
 </script>
 
-{#if gameStatus == GameStatus.Won}
-	<h1>You won!</h1>
-	<button on:click={restart}>Restart</button>
-{/if}
-<section>
-	{#each cards as card}
-		<Card bind:info={card} />
-	{/each}
-</section>
+{#if $gameStatus == GameStatus.Default}
 
-<style>
-	section {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-		grid-template-rows: 1fr 1fr 1fr 1fr;
-		gap: 0px;
-	}
-</style>
+	<button on:click={() => $gameStatus = GameStatus.Playing}>Start</button>
+	<Slider bind:value={gridSize} min={2} max={8} step={2} />
+
+{:else if $gameStatus == GameStatus.Playing}
+
+	<button on:click={() => $gameStatus = GameStatus.Default}>Exit</button>
+	<CardGrid {gridSize}/>
+
+{:else if $gameStatus == GameStatus.Won}
+
+	<h1>You won!</h1>
+	<button on:click={() => $gameStatus = GameStatus.Default}>Play again</button>
+
+{/if}

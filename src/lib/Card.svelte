@@ -4,15 +4,15 @@
 <script lang='ts'>
 	import { CardStatus, type CardInfo } from "$lib/types";
 	export let info: CardInfo;
+
 	let bg: string = "white";
+
 	async function select() {
 
 		switch(info.status) {
 
 			case CardStatus.Default:
-
 				info.status = CardStatus.Selected;
-				// flip animation
 				setTimeout(() => {
 					if(info.status == CardStatus.Selected)
 						info.status = CardStatus.Default;
@@ -20,9 +20,8 @@
 				break;
 
 			case CardStatus.Selected:
-
+				// Deselect
 				info.status = CardStatus.Default;
-				// flip animation
 				break;
 		}
 	}
@@ -50,9 +49,9 @@
 
 <style>
 	button {
-		/* width: 5em; */
 		height: 5em;
-		margin: 0px 0px;
+		margin: 0px;
+		padding: auto;
 		font-size: 2em;
 	}
 
