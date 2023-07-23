@@ -5,20 +5,46 @@
   />
 </svelte:head>
 
-<script>
+<script lang='ts'>
 	import CardGrid from "$lib/CardGrid.svelte";
-	import { gameStatus } from "$lib/store";
+	import { gameStatus, startTime } from "$lib/store";
 	import { GameStatus } from "$lib/types";
 	import { Slider } from "carbon-components-svelte";
+    import type { ActionData } from "./$types";
 	let gridSize = 2;
+	let time = 0;
+	let name = '';
+	export let form: ActionData | null ;
+
+	$: {
+		switch($gameStatus) {
+			case GameStatus.Default:
+				time = 0;
+				break;
+			case GameStatus.Playing:
+				$startTime = Date.now();
+				break;
+			case GameStatus.Won:
+				time = Date.now() - $startTime;
+				break;
+		}
+	}
+
 </script>
 
 {#if $gameStatus == GameStatus.Default}
 
 	<div>
+		{#if form}
+			{#if form.success}
+				<p>Added to leaderboard!</p>
+			{:else if form.error}
+				<p>Failed to add to leaderboard</p>
+			{/if}
+		{/if}
+		<h1>Recall Rumble</h1>
 		<button on:click={() => $gameStatus = GameStatus.Playing}>Start</button>
 		<Slider bind:value={gridSize} min={2} max={8} step={2} />
-
 	</div>
 
 {:else if $gameStatus == GameStatus.Playing}
@@ -29,8 +55,15 @@
 {:else if $gameStatus == GameStatus.Won}
 
 	<div>
-		<h1>You won!</h1>
+		<h1>You won in {time/1000} seconds!</h1>
 		<button on:click={() => $gameStatus = GameStatus.Default}>Play again</button>
+
+		<form method="POST" style="display:flex; flex-direction: row; margin-top: 10%;">
+			<input name="name" type="text" placeholder="Name" bind:value={name} style="margin: 1em; border-radius:0.5em; padding-left: 1em;">
+			<input name="time" type="hidden" bind:value={time}>
+			<button on:click={() => {}}>Add to leaderboard</button>
+		</form>
+
 	</div>
 
 {/if}

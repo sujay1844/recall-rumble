@@ -4,3 +4,4 @@ import { type CardInfo, GameStatus } from "./types";
 
 export let cards = writable<CardInfo[]>([]);
 export let gameStatus = writable<GameStatus>(GameStatus.Default);
+export let startTime = writable<number>(0);

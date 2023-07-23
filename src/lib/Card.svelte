@@ -1,6 +1,7 @@
 <svelte:head>
 	<meta charset="utf-8">
 </svelte:head>
+
 <script lang='ts'>
 	import { CardStatus, type CardInfo } from "$lib/types";
 	export let info: CardInfo;
