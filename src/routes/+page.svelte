@@ -12,6 +12,7 @@
 	import { Slider } from "carbon-components-svelte";
     import type { ActionData } from "./$types";
     import { goto } from "$app/navigation";
+	import GithubLink from "$lib/GithubLink.svelte";
 	let gridSize = 4;
 	let time = 0;
 	let name = '';
@@ -33,6 +34,15 @@
 
 </script>
 
+<header style="display:flex; flex-direction:row; justify-content:flex-end;">
+		<button style="height:4em;" on:click={() => goto('/leaderboard/4')}>&#127942;&nbsp;LeaderBoard</button>
+		<GithubLink link='https://github.com/sujay1844/recall-rumble'/>
+
+		{#if $gameStatus === GameStatus.Playing}
+			<button on:click={() => $gameStatus = GameStatus.Default}>Back to Main Menu</button>
+		{/if}
+</header>
+
 {#if $gameStatus == GameStatus.Default}
 
 	<div>
@@ -46,12 +56,11 @@
 		<h1>Recall Rumble</h1>
 		<button on:click={() => $gameStatus = GameStatus.Playing}>Start</button>
 		<Slider bind:value={gridSize} min={2} max={8} step={2} maxLabel={'8x8'} minLabel={'2x2'} labelText={'Grid Size'} hideTextInput={true} />
-		<button style="position:absolute; top:5%; right:5%;" on:click={() => goto('/leaderboard/4')}>&#127942;&nbsp;LeaderBoard</button>
+		
 	</div>
 
 {:else if $gameStatus == GameStatus.Playing}
 
-	<button on:click={() => $gameStatus = GameStatus.Default}>Exit</button>
 	<CardGrid {gridSize}/>
 
 {:else if $gameStatus == GameStatus.Won}
@@ -79,7 +88,7 @@
 		justify-content: center;
 		margin-top: 20%;
 	}
-	div button {
+	button {
 		margin: 1em;
 		padding: 1em;
 		padding-left: 2em;
