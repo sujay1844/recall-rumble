@@ -46,7 +46,7 @@
 		<h1>Recall Rumble</h1>
 		<button on:click={() => $gameStatus = GameStatus.Playing}>Start</button>
 		<Slider bind:value={gridSize} min={2} max={8} step={2} maxLabel={'8x8'} minLabel={'2x2'} labelText={'Grid Size'} hideTextInput={true} />
-		<button style="position:absolute; top:5%; right:5%;" on:click={() => goto('/leaderboard/4')}>LeaderBoard</button>
+		<button style="position:absolute; top:5%; right:5%;" on:click={() => goto('/leaderboard/4')}>&#127942;&nbsp;LeaderBoard</button>
 	</div>
 
 {:else if $gameStatus == GameStatus.Playing}
