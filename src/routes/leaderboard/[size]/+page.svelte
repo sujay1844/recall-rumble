@@ -10,7 +10,7 @@
         <button on:click={() => {goto('/leaderboard/4')}}>4x4</button>
         <button on:click={() => {goto('/leaderboard/6')}}>6x6</button>
         <button on:click={() => {goto('/leaderboard/8')}}>8x8</button>
-        <button style="margin-left:auto;" on:click={() => {goto('/')}}>Play Game</button>
+        <button style="margin-left:auto;" on:click={() => {goto('/')}}>Back to Main Menu</button>
     </header>
     <ul>
         {#each data.entries as item}
