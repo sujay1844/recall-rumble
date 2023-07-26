@@ -1,0 +1,61 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "87453f14-78ac-404a-ab1e-b11608ed5c97",
+  "prevId": "2e34d21a-4df2-41c9-b1d2-e6102ebff91f",
+  "tables": {
+    "memory_game_leaderboard_entries": {
+      "name": "memory_game_leaderboard_entries",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "time": {
+          "name": "time",
+          "type": "decimal(6,3)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "time_idx": {
+          "name": "time_idx",
+          "columns": [
+            "time"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "memory_game_leaderboard_entries_id": {
+          "name": "memory_game_leaderboard_entries_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {
+      "\"entries\"": "\"memory_game_leaderboard_entries\""
+    },
+    "columns": {}
+  }
+}
