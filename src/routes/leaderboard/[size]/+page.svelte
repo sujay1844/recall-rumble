@@ -14,7 +14,7 @@
     </header>
     <ul>
         {#each data.entries as item}
-            <li>{item.name} - {item.time}</li>
+            <li>{item.name} - {item.time}secs</li>
         {/each}
     </ul>
 </section>

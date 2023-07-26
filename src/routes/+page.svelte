@@ -12,7 +12,7 @@
 	import { Slider } from "carbon-components-svelte";
     import type { ActionData } from "./$types";
     import { goto } from "$app/navigation";
-	let gridSize = 2;
+	let gridSize = 4;
 	let time = 0;
 	let name = '';
 	export let form: ActionData | null ;
@@ -45,8 +45,8 @@
 		{/if}
 		<h1>Recall Rumble</h1>
 		<button on:click={() => $gameStatus = GameStatus.Playing}>Start</button>
-		<Slider bind:value={gridSize} min={2} max={8} step={2} />
-		<button style="position:absolute; top:5%; right:5%;" on:click={() => goto('/leaderboard/2')}>LeaderBoard</button>
+		<Slider bind:value={gridSize} min={2} max={8} step={2} maxLabel={'8x8'} minLabel={'2x2'} labelText={'Grid Size'} hideTextInput={true} />
+		<button style="position:absolute; top:5%; right:5%;" on:click={() => goto('/leaderboard/4')}>LeaderBoard</button>
 	</div>
 
 {:else if $gameStatus == GameStatus.Playing}
